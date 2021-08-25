@@ -1,25 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import { useWeb3 } from "@openzeppelin/network/react";
+import Web3Data from "./Web3Data";
+const infuraProjectId = process.env.INFURA_PROJECT_ID;
 
 function App() {
+  const web3Context = useWeb3(
+    `wss://rinkeby.infura.io/ws/v3/${infuraProjectId}`
+  );
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div>
+        <h1>Metamask ETH Detail</h1>
+        <Web3Data title="Web3 Data" web3Context={web3Context} />
+      </div>
     </div>
   );
 }
-
 export default App;
