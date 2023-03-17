@@ -19,12 +19,10 @@ jobs:
 
       - name: Build
         run: yarn build
-        env:
-          CI: ""
 
       - name: "Deploy to Skynet"
         uses: SkynetLabs/deploy-to-skynet-action@v2
         with:
-          upload-dir: ./build
+          upload-dir: build
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          registry-seed: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' && secrets.REGISTRY_SEED || '' }}
+          registry-seed: ${{ secrets.SKYNET_REGISTRY_SEED || '' }}
